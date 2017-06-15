@@ -10,3 +10,11 @@
 * lxml
 
 程序源码许可证： GPLv3
+
+
+## Installation
+
+```bash
+aptitude install python3-pip libxml2-dev libxslt-dev python-dev
+pip3 install -r requirements.txt
+```
