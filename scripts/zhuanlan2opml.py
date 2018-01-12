@@ -1,4 +1,7 @@
 # coding: utf-8
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 import requests
 import sys
 from pyquery import PyQuery as pq
@@ -162,13 +165,14 @@ if __name__ == '__main__':
     for step in range(0, following_columns_count, 20):
         columns += user.following_columns(offset=step)
     # print(columns[0])
-    outline = '<outline type="rss" text="{text}" title="{title}" xmlUrl="{xml_url}" htmlUrl="{html_url}"/>'
+    outline = '<outline type="rss" text="{text} (Zhihu)" title="{title} (Zhihu)" xmlUrl="{xml_url}" htmlUrl="{html_url}"/>'
     outlines = []
     for column in columns:
+        print(column)
         outlines.append(outline.format(**{
             "text": column['title'],
             "title": column['title'],
-            "xml_url": "https://rss.qiwihui.com/zhihuzhuanlan/" + column["id"],
+            "xml_url": "https://zhuanlan.zhihu.com/" + column["id"],
             "html_url": column["url"]
         }))
 
