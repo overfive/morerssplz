@@ -3,7 +3,6 @@
 from urllib.parse import urlencode, urljoin, urlsplit, parse_qs, quote
 import json
 import datetime
-import time
 import logging
 import re
 from functools import partial
@@ -194,6 +193,8 @@ class ZhihuStream(base.BaseHandler):
         except tornado.httpclient.HTTPError as e:
             if e.code in [404, 429]:
                 raise web.HTTPError(e.code)
+            elif e.code in [410, 401]:
+                raise web.HTTPError(403)
             else:
                 raise
         self.finish(rss)
